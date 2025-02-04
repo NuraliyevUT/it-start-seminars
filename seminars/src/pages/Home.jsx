@@ -5,35 +5,47 @@ import SeminarForm from "../components/SeminarForm";
 import { useSeminars } from "../hooks/useSeminars";
 
 function Home() {
+  // Получаем функции для работы с семинарами
   const { fetchSeminars, handleDeleteSeminar } = useSeminars();
+
+  // Состояния для хранения списка семинаров и текущего выбранного семинара
   const [seminars, setSeminars] = useState([]);
   const [selectedSeminar, setSelectedSeminar] = useState(null);
+
+  // Состояние управления модальными окнами
   const [modalState, setModalState] = useState({
     add: false,
     edit: false,
     delete: false,
   });
+
+  // Состояние пагинации
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
+  // Получение списка семинаров при загрузке страницы
   useEffect(() => {
     fetchSeminars().then(setSeminars);
   }, []);
 
+  // Функция обновления списка семинаров
   const refreshSeminars = useCallback(() => {
     fetchSeminars().then(setSeminars);
   }, []);
 
+  // Открытие модального окна
   const openModal = (type, seminar = null) => {
     setSelectedSeminar(seminar);
     setModalState((prev) => ({ ...prev, [type]: true }));
   };
 
+  // Закрытие модального окна
   const closeModal = (type) => {
     setModalState((prev) => ({ ...prev, [type]: false }));
     setSelectedSeminar(null);
   };
 
+  // Удаление семинара
   const handleDelete = async () => {
     if (!selectedSeminar) return;
     await handleDeleteSeminar(selectedSeminar.id);
@@ -41,7 +53,7 @@ function Home() {
     closeModal("delete");
   };
 
-  // Pagination calculations
+  // Вычисление данных для пагинации
   const totalPages = Math.ceil(seminars?.length / itemsPerPage);
   const paginatedData = seminars?.slice(
     (currentPage - 1) * itemsPerPage,
@@ -50,6 +62,7 @@ function Home() {
 
   return (
     <div className="p-4">
+      {/* Верхняя панель с заголовком и кнопкой добавления */}
       <div className="sticky top-0 bg-white z-10 shadow-md p-4 flex justify-between items-center mb-2 rounded-2xl">
         <h1 className="text-xl font-semibold">Список семинаров</h1>
         <button
@@ -60,7 +73,7 @@ function Home() {
         </button>
       </div>
 
-      {/* Add & Edit Modals */}
+      {/* Модальные окна для добавления и редактирования семинаров */}
       {["add", "edit"].map((type) => (
         <CustomModal
           key={type}
@@ -79,7 +92,7 @@ function Home() {
         </CustomModal>
       ))}
 
-      {/* Content Section */}
+      {/* Таблица с данными */}
       {seminars?.length > 0 ? (
         <>
           <div className="h-[550px] overflow-y-auto">
@@ -93,7 +106,7 @@ function Home() {
             />
           </div>
 
-          {/* Pagination Controls */}
+          {/* Элементы управления пагинацией */}
           {totalPages > 1 && (
             <div className="flex justify-center items-center mt-4 gap-2">
               <button
@@ -124,7 +137,7 @@ function Home() {
         </div>
       )}
 
-      {/* Delete Confirmation Modal */}
+      {/* Модальное окно подтверждения удаления */}
       <CustomModal
         maxW="400px"
         isOpen={modalState.delete}
