@@ -1,33 +1,25 @@
-# Тестовое задание для Junior React Developer
+# React Seminar App
 
-## Задание
+# To start project use "npm run dev"
 
-Необходимо развернуть локально `json-server` и загрузить в него данные **seminars**. Используйте любые удобные технологии, но обязательно с использованием React для реализации следующих функций:
+# To run json server "npx json-server --watch db.json --port 5000"
 
-1. **Запрос данных**
+This is a simple React application that allows you to view, add, edit and delete seminars.
 
-   - Запросите данные с семинарами из `json-server`.
+The application uses the following technologies:
 
-2. **Отрисовка списка семинаров**
+- React
+- React Hooks
+- Axios
+- JSON Server
 
-   - Отобразите список семинаров на странице.
+The application is divided into two main parts:
 
-3. **Удаление семинара**
+- The main page displays a list of all seminars with the ability to filter by date and time.
+- The add and edit pages allow you to add new seminars or edit existing ones.
 
-   - Реализуйте кнопку удаления семинара, которая при клике открывает окно подтверждения.
-   - При подтверждении удаления отправьте `DELETE` запрос на сервер.
+The application uses React Hooks to manage state and side effects. The main page uses the `useState` hook to store the list of seminars and the filter criteria. The add and edit pages use the `useState` hook to store the seminar data and the `useEffect` hook to fetch the seminar data when the component mounts.
 
-4. **Редактирование семинара**
+The application uses React Router to handle client-side routing. The main page is rendered at the root path and the add and edit pages are rendered at the `/add` and `/edit/:id` paths respectively.
 
-   - Реализуйте кнопку редактирования семинара.
-   - Редактирование должно происходить в модальном окне.
-
-5. **Размещение на GitHub**
-   - Залейте проект на GitHub и пришлите ссылку.
-   - **Важно:** `json-server` должен находиться в том же репозитории, что и приложение.
-
-## Дополнительные рекомендации
-
-- Используйте современные подходы (например, React Hooks, функциональные компоненты).
-- Обратите внимание на обработку ошибок и состояния загрузки.
-- Добавьте комментарии в код для пояснения ключевых моментов реализации.
+The application uses Axios to make requests to the JSON Server to fetch and manipulate the seminar data.
