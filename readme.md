@@ -1,8 +1,8 @@
 # React Seminar App
 
-# To start project use "npm run dev"
+To start project use "npm run dev"
 
-# To run json server "npx json-server --watch db.json --port 5000"
+To run json server "npx json-server --watch db.json --port 5000"
 
 This is a simple React application that allows you to view, add, edit and delete seminars.
 
