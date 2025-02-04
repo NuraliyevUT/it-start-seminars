@@ -108,7 +108,9 @@ function Home() {
               </span>
               <button
                 className="px-3 py-1 bg-gray-300 rounded disabled:opacity-50"
-                onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                onClick={() =>
+                  setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+                }
                 disabled={currentPage === totalPages}
               >
                 Вперед
@@ -117,7 +119,7 @@ function Home() {
           )}
         </>
       ) : (
-        <div className="h-[550px] flex justify-center items-center">
+        <div className="h-[550px] bg-white rounded-2xl flex justify-center items-center">
           <p className="text-gray-500 text-lg">Данные отсутствуют</p>
         </div>
       )}
